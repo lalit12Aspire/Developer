@@ -1,0 +1,37 @@
+.container-fluid.vh-100{
+  margin-top:80px;
+
+}
+
+.login
+{
+  margin-bottom:50px;
+}
+
+.col-md-4{
+  margin-right: 600px;
+}
+
+// body{
+//   background-image: url(https://th.bing.com/th/id/OIP.sj9pGWaiL1-hIhenNTy7BwHaC9?rs=1&pid=ImgDetMain);
+//   background-size: 100% 100%;
+// }
+.image-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    margin-left: 150px;
+    margin-bottom: 150px;
+    max-width: 100%;
+    height: auto;
+}
+
+.image-container img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 75%;
+  margin-top: 110px;
+  margin-left: 640px;
+}
