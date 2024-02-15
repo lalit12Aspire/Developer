@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Assignment.Contracts.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Assignment.Migrations
 {

@@ -12,6 +12,6 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   getApp() {
-    return this.http.get<App[]>(this.apiBaseAddress + 'api/App');
+    return this.http.get<App[]>(this.apiBaseAddress + 'api/App/');
   }
 }

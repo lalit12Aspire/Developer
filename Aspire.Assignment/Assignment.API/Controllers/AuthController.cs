@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using Assignment.Core;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,21 +43,41 @@ namespace Assignment.Controllers
         public async Task<IActionResult> Get()
         {
             var query = new GetAllUserQuery();
-            var response = await _mediator.Send(query);
+            var response = await _mediator.Send(query); 
             return Ok(response);
         }
 
-        [HttpPost]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.Created)]
+        [HttpPost("register")]
+        [ProducesResponseType(typeof(int),(int)HttpStatusCode.Created)]
         [ProducesErrorResponseType(typeof(BaseResponseDTO))]
-        public async Task<IActionResult> Post([FromBody] UserDTO model)
+        public async Task<IActionResult> Register([FromBody] CreateUserDTO model){
+            try
+            {
+                var command =new CreateUserCommand(model);
+                var response=await _mediator.Send(command);
+                return Ok(response);
+            }
+            catch (InvalidRequestBodyException)
+            {
+                return BadRequest(new BaseResponseDTO{
+                    IsSuccess=false
+                });
+                }
+            }
+        
+       
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+        [ProducesErrorResponseType(typeof(BaseResponseDTO))]
+        public async Task<IActionResult> Login([FromBody] UserDTO model)
         {
             try
             {
                 var command = new SignInUserByUserNameQuery(model.Username,model.Password);
                 var response = await _mediator.Send(command);
-                
-                // Return the user and token in the response
+                if (response==null){
+                    return Unauthorized();
+                }
                 return Ok(response);
                 
             }
@@ -69,9 +90,9 @@ namespace Assignment.Controllers
                 });
             }
         }
-
-        [HttpGet]
-        [Route("{name}")]
+        
+        [HttpGet("name")]
+        //[Route("{name}")]
         [ProducesResponseType(typeof(UserDTO), (int)HttpStatusCode.OK)]
         [ProducesErrorResponseType(typeof(BaseResponseDTO))]
         public async Task<IActionResult> GetById(string name)
@@ -93,3 +114,5 @@ namespace Assignment.Controllers
         }
     }
 }
+
+ 

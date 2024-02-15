@@ -50,6 +50,7 @@ namespace Assignment.Providers.Handlers.Commands
                 Price = model.Price,
                 Type = model.Type,
                 Developer = model.Developer
+                
             };
 
             _repository.App.Add(entity);

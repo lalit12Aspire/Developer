@@ -40,7 +40,7 @@ namespace Assignment.Controllers
             var response = await _mediator.Send(query);
             return Ok(response);
         }
-
+        
         [HttpPost]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.Created)]
         [ProducesErrorResponseType(typeof(BaseResponseDTO))]
@@ -51,7 +51,7 @@ namespace Assignment.Controllers
                 var command = new CreateUserCommand(model);
                 var response = await _mediator.Send(command);
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Authentication:Jwt:Secret"));
+                var key = Encoding.UTF8.GetBytes(_configuration.GetValue<string>("Authentication:Jwt:Secret"));
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new[] { new Claim("userId", model.Username.ToString()) }),

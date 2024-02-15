@@ -9,6 +9,8 @@ using Assignment.Infrastructure;
 using Assignment.Core;
 using Microsoft.AspNetCore.Mvc;
 using Assignment.Core.Security;
+using Assignment.Contracts.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment
 {
